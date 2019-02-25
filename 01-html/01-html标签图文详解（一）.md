@@ -1,12 +1,4 @@
 
-
-> 本文最初于2015-10-01发表于[博客园](http://www.cnblogs.com/smyhvae/p/4850684.html)，并在[GitHub](https://github.com/smyhvae/Web)上持续更新**前端的系列文章**。欢迎在GitHub上关注我，一起入门和进阶前端。
-
-> 以下是正文。
-
-
-国庆节快乐，还在加班的童鞋，良辰必有重谢！
-
 ## 本文主要内容
 
 
@@ -625,7 +617,10 @@ PS：Chrome浏览器是世界上HTML5支持最好的浏览器。提供了非常�
 div：把标签中的内容作为一个块儿来对待(division)。必须单独占据一行。
 
 div标签的属性：
- - `align="属性值"`：设置块儿的位置。属性值可选择：left、right、 center。
+ - `text-align="属性值"`：设置内部文字的位置。属性值可选择：left、right、 center。
+ 注意div是块状元素，其长度为整个页面，span为内联元素，其大小为内部文字
+ div模块居中 margin 上下为0，左右为auto
+ span模块居中 display：block text-align：center
 
 <br>
 
@@ -676,45 +671,6 @@ div举例：
 
 所以，我们亲切的称呼这种模式叫做“**div+css**”。**div标签负责布局，负责结构，负责分块。css负责样式**。
 
-
-
-
-
-
-### 换行标签`<br>`（已废弃）
-
-当你打算结束一行，而又不想开始一个新段落时，`<br> `标签就派上用场了。无论你将它置于何处，`<br> `标签都会产生一个强制的换行。
-```html
-This <br> is a para<br>graph with line breaks
-```
-效果如下：
-
-![](http://img.smyhvae.com/2015-10-01-cnblogs_html03.png)
-
-上图显示，**`<p>`标签和`<br>`标签的区别在于**：`<p>`标签会在段落的前后自动插入一个空行，而`<br>`标签没有空行；而且`<br>`标签没有属性。
-
-注意`<br>` 没有结束标签，把`<br>`标签写为 `<br/>` 是经得起未来考验的做法，XHTML 和 XML 都接受在打开的标签内部来关闭标签的做法。
-
-<br>
-
-### 水平线标签`<hr>`（已废弃）
-
-水平分隔线（horizontal rule）可以在视觉上将文档分隔成各个部分。
-效果如下：
-
-![Paste_Image.png](http://img.smyhvae.com/2015-10-01-cnblogs_html_04.png)
-
-属性：
- - `align="属性值"`：设定线条置放位置。属性值可选择：left right center。
- - `size="2" `：设定线条粗细。以像素为单位，内定为2。
- - `width="500"`或`width="70%"`：设定线条长度。可以是绝对值（单位是像素）或相对值。如果设置为相对值的话，内定为100%。
- - `color="#0000FF"`：设置线条颜色。
- - `noshade`：不要阴影，即设定线条为平面显示。若没有这个属性则表明线条具阴影或立体，这是内定值。
-属性效果演示：
-
-![Paste_Image.png](http://img.smyhvae.com/2015-10-01-cnblogs_html_05.png)
-
-<br>
 
 ### 内容居中标签 `<center>`
 
