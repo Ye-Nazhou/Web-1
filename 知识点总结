@@ -1,0 +1,33 @@
+HTML只负责语义的表述，如问及h1标签做了什么，回答语义表述
+
+超链接href绝对路径+相对路径，既可以跳转其他页面，也可以跳转到当前页面指定位置，#符号表示指定位置跳转
+
+图片src注意路径的书写，绝对路径+相对路径，其中相对路径是用..表示的，绝对路径是可以用网页表示
+
+导航栏的写法可以用ul，定义列表是dl
+
+inframe的写法src
+
+ratio单选注意name属性的一致性 checkbox多选框 select-option
+
+块状元素想要重置居中，注意height与padding，margin的偶数定理，行内元素想要居中，注意fontsize与lineheight的关系
+
+块状盒子居中 margin 0 auto且确定width 文本居中textalign center
+
+伪类状态的书写顺序 love-hate love:link visited hate:hover active hate&focus对所有的元素都适用
+
+继承所带来的样式改变权值为0
+
+border的属性一定要写全
+
+当子元素在父元素中时，要善于利用父亲的padding or 子元素的border，而不是子元素的margin间隔双方，注意margin本质上还是两个兄弟元素之间的距离
+
+基本数据类型+引用数据类型 基本是存储在栈之中，引用是存储在堆之中，引用存储的是地址，所以改变一个值另一引用值也会随之改变
+
+fn()与fn的区别：fn()是调用函数，fn是函数本身
+
+this关键字指定了调用对象，window调用函数，对象调用方法，创建对象调用构造方法
+
+调用函数时，浏览器隐性携带两个参数 arguments 和this argument是用于封装实参
+
+json和对象的区别
