@@ -62,6 +62,21 @@ $(“#btnShow”) // 获取id属性为btnShow的元素
 $(“div”) // 获取所有的div标签元素
 jQuery对象和DOM 对象可以互相转换
 
+CSS盒模型和IE盒模型的区别在于对width和height的理解
+在css中采用box-sizing属性指定采用哪种盒模型，content-box表示width和height仅包含content(css模型)
+border-box表示width包含padding，border(IE盒模型)，但是不包括margin
 
+js获取dom节点样式的注意点
+elememt.style.width/height 这种方法是有局限性的，仅能获得内部样式，无法获得外联or内嵌样式
+window.getComputedStyle(element).width/height 建议用这种
 
+BFC概念 https://github.com/Ye-Nazhou/Web-1/blob/master/14-%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/02-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B%E5%8F%8ABFC.md
+
+DOM事件模型 0 2 3  DOM事件流分成三个阶段
+（1）捕获：从 window 对象传到目标元素。
+（2）目标阶段：事件通过捕获，到达目标元素，这个阶段就是目标阶段。
+（3）冒泡：从目标元素传到 Window 对象。
+
+event.currentTarget   //当前所绑定的事件对象。在事件委托中，指的是【父元素】。
+event.target  //当前被点击的元素。在事件委托中，指的是【子元素】。
 
