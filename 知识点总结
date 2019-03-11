@@ -80,3 +80,23 @@ DOM事件模型 0 2 3  DOM事件流分成三个阶段
 event.currentTarget   //当前所绑定的事件对象。在事件委托中，指的是【父元素】。
 event.target  //当前被点击的元素。在事件委托中，指的是【子元素】。
 
+CSS编程化，即less与sass的使用
+
+CSS命名规范BEM block_element block--modifier
+
+BFC Block Formatting Contexts 即容器内部的子元素无法影响到容器外部的元素
+
+响应式设计——flexbox + 媒体查询
+
+call和apply方法均是用于改变this的指向，第一个参数为this指向对象，其余以参数形式或者arguments形式进行传递
+
+JavaScript模块化规范。用多种方式来描述JavaScript中多个库或者类之间的交互方式,如exports和requires
+
+
+
+
+
+
+
+
+
