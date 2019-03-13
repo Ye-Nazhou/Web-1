@@ -53,6 +53,7 @@ SSL使用的是公开密钥加密技术
 websocket和socket没有什么关系
 websocket是一种协议，依赖于HTTP，是HTTP的升级版
 socket是接口，位于应用层和服务层之间
+socket简介https://www.cnblogs.com/mq0036/p/3812755.html
 
 同步异步是对于操作结果而言的，即会不会等待结果返回
 阻塞非阻塞是对于线程而言的，即线程是否会进入阻塞状态
