@@ -123,9 +123,33 @@ nodeType 元素节点1 属性节点2 文本节点3
 
 无论什么时候，只要利用查询函数查询dom结点，都会查询整棵dom树以寻找可能符合要求的结点
 
+浏览器页面有哪三层构成，分别是什么，作用是什么?
+构成：结构层、表示层、行为层 
+分别是：HTML、CSS、JavaScript 
+作用：HTML实现页面结构，CSS完成页面的表现与风格，JavaScript实现一些客户端的功能与业务。
 
+注意cookies sessionStorage localStorage区别
 
+link和@import的区别
+两者都是外部引用CSS的方式，但是存在一定的区别：
+区别1： link 是 XHTML 标签，除了加载 CSS 外，还可以定义 RSS 等其他事务； @import 属于 CSS 范畴，只能加载 CSS 。
+区别2： link 引用 CSS 时，在页面载入时同时加载； @import 需要页面网页完全载入以后加载。
+区别3： link 是 XHTML 标签，无兼容问题； @import 是在 CSS2.1 提出的，低版本的浏览器不支持。
+区别4： link 支持使用 Javascript 控制 DOM 去改变样式；而 @import 不支持。
 
+`data-`为H5新增的为前端开发者提供自定义的属性
+可以通过对象的 `dataset` 属性获取，不支持该属性的浏览器可以通过 `getAttribute` 方法获取
+
+浏览器内核分为渲染引擎(layout engineer或 Rendering Engine) 和 JS 引擎
+
+iframe会阻塞主页面的 Onload 事件；
+搜索引擎的检索程序无法解读这种页面，不利于 SEO;
+iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+
+如何实现浏览器内多个标签页之间的通信
+websocket localstorage cookie
+
+注意display和visibility的区别
 
 
 
