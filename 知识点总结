@@ -155,4 +155,5 @@ websocket localstorage cookie
 要答出两个方面1.获取资源 浏览器开启一个线程，远程dns服务器获取相应的IP地址 然后tcpip连接，发出HTTPget请求获取资源
 2.dom树和css树的渲染最后得到页面
 
-
+组件化 模块化区别
+组件化是对于UI而言的 模块化是对于代码而言的
