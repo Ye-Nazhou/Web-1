@@ -1,4 +1,196 @@
-React是一个帮助构造页面UI的库而并非一个框架
-React的组件就相当于MVC中的View
-组件的显示形态和行为是由某些数据决定的。当数据改变时，组件的显示形态可能会发生相应的改变。
-在实际的项目当中，它并不能解决我们所有的问题，需要结合其它的库，例如 Redux、React-router 等来协助提供完整的解决方法
+React.js  React Native  React.VR   React Fiber(Reactjs 16)
+React只是一个视图库，它的功能仅仅是把组件渲染成浏览器中的可见元素
+
+React应用创建方式
+1.通过CDN(Content Delivery Network)安装 引入js标签
+2.通过create-react-app脚手架工具配置安装 需要进行编译才可以运行
+
+~~~~~~~~
+import React, { Component } from 'react'; //注意ES6解构赋值 等价于 const Component = React.Component 
+
+class App extends Component { //class App extends React.Component
+  render() {
+    return (
+      <div className="App"></div>
+    );
+  }
+}
+
+export default App;
+~~~~~~~
+React官方文档总结
+
+第一章 JSX简介
+
+第二章 元素渲染
+在这里可以得知一种更新UI的方式是通过调用reactDom的render函数
+每次调用的时候赋值props都发生改变，即可更新
+
+
+第三章 组件&Props
+组件相当于JavaScript函数，要注意ES6之前class都是用函数表示的
+所以react组件也可以用函数或者class表示
+注意constructor函数和super函数是class自带的，render函数是将虚拟节点转换成实际节点，该函数是属于react的
+所有的react组件都必须像纯函数一样使用上级赋予的props
+
+
+第四章 State&生命周期
+react主要步骤
+static defaultProps = {} static propTypes = {}  ->  constructor super this.state  ->
+componentWillMount -> render() -> componentDidMount() 
+组件运行时 state发生改变 -> 进行优化处理 shouldComponentUpdata -> componentWillMount
+-> render() -> componentDidMount()
+组件卸载 -> componentWillUnmount() -> End
+父组件重新render导致props改变【注意props和state的区别】 -> componentWillReceiveProps()
+之前学过如果想要更新UI可以反复调用reactDom中的render函数，但是这一方法其实是耗费了资源
+另一种方法是更新state状态，state和props是类似的，但是state是完全受控于当前自身组件，是一种私有的变量
+props是可以被父组件所改变的
+注意对于类组件而言(即调用class生成的组件)， 应当始终使用props调用基础构造函数
+
+
+前端组件化概念,组件名以大写字母开头
+React.js 可以用 JSX 来描述组件，JSX 其实就是 JavaScript 对象
+对于任一HTML描述的DOM结点都可以使用JavaScript对象来描述
+每一个结点包括三个信息 标签名，属性，子元素
+如果在代码中直接写JavaScript对象会十分麻烦 如果只写DOM结点和之前不用框架一致
+JSX 是 JavaScript 语言的一种语法扩展
+JSX 在编译的时候会变成相应的JavaScript对象描述
+
+JSX中属性注意className和htmlFor 
+
+事物监听在没有特殊处理时只能用在普通的html结点上，无法在组件上作用
+
+React响应式设计 事件绑定
+React是响应式框架，可以操作数据，通过数据变化会自动构建DOM结点
+React调用方法时，并不是通过对象方法的方式调用（this.handleClickOnTitle），而是直接通过函数调用 （handleClickOnTitle）
+所以事件监听函数内并不能通过 this 获取到实例，事件绑定时注意bind指向 
+在使用bind进行绑定时注意参数顺序
+React.js 会给每个事件监听传入一个 event 对象
+
+state & setState
+setState 方法由父类 Component 所提供。调用这个函数时，React.js 会更新组件的状态 state ，并且重新调用 render 方法
+它接受一个对象或者函数作为参数
+当调用 setState 的时候，并不会马上修改 state
+如果想要使用上一次setState的结果，使用新的setState函数对结果进行处理，则可以往setState中传递函数
+
+handleClickOnLikeButton () {
+    this.setState((prevState) => {
+      return { count: 0 }
+    })
+    this.setState((prevState) => {
+      return { count: prevState.count + 1 } // 上一个 setState 的返回是 count 为 0，当前返回 1
+    })
+    this.setState((prevState) => {
+      return { count: prevState.count + 2 } // 上一个 setState 的返回是 count 为 1，当前返回 3
+    })
+    // 最后的结果是 this.state.count 为 3
+  }
+immutable state不允许直接进行改变
+
+配置组件的 props
+在使用一个组件的时候，可以把参数放在标签的属性当中，所有的属性都会作为 props 对象的键值
+可以通过给组件添加类属性 defaultProps 来配置默认参数 static defaultProps = {} 
+注意和强制props的区别
+static props = {
+        onSubmit : PropTypes.func
+}
+props.children的使用
+
+挂载阶段的组件生命周期
+ React.js 将组件渲染，并且构造 DOM 元素然后塞入页面的过程称为组件的挂载
+ -> constructor()
+-> componentWillMount()
+-> render()
+// 然后构造 DOM 元素插入页面
+-> componentDidMount()
+// ...
+// 即将从页面中删除
+-> componentWillUnmount()
+// 从页面中删除
+
+更新阶段的组件生命周期
+
+ref 和 React.js 中的 DOM 操作
+React提供了 ref 属性来获取已经挂载的元素的 DOM 节点
+
+~~~~~~~~
+ReactDOM.render(
+  <Card>
+    <h2>React.js 小书</h2>
+    <div>开源、免费、专业、简单</div>
+    订阅：<input />
+  </Card>,
+  document.getElementById('root')
+)
+class Card extends Component {
+  render () {
+    return (
+      <div className='card'>
+        <div className='card-content'>
+          {this.props.children}
+        </div>
+      </div>
+    )
+  }
+}
+
+~~~~~~~~
+
+dangerouslySetHTML 和 style 属性
+两者都需要将属性转换成一个对象再传给元素
+~~~~~~~~
+dangerouslySetInnerHTML={{__html: this.state.content}}
+<h1 style={{fontSize: '12px', color: 'red'}}>React.js 小书</h1>
+~~~~~~~~
+
+PropTypes 和组件参数验证
+安装一个 React 提供的第三方库 prop-types
+~~~~~~~~
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+class Comment extends Component {
+  static propTypes = {
+    comment: PropTypes.object
+  }
+
+  render () {
+    const { comment } = this.props
+    return (
+      <div className='comment'>
+        <div className='comment-user'>
+          <span>{comment.username} </span>：
+        </div>
+        <p>{comment.content}</p>
+      </div>
+    )
+  }
+}
+~~~~~~~~
+
+
+组件的内容编写顺序
+static 开头的类属性，如 defaultProps、propTypes
+构造函数，constructor
+getter/setter
+组件生命周期
+_ 开头的私有方法
+事件监听方法，handle*
+render*开头的方法，有时候 render() 方法里面的内容会分开到不同函数里面进行，这些函数都以 render* 开头
+render() 方法
+
+高阶组件
+高阶组件就是一个函数，传给它一个组件，它返回一个新的组件
+
+Redux 和 React-redux 并不是同一个东西。
+Redux 是一种架构模式（Flux 架构的一种变种），可以应用到 React 和 Vue
+而 React-redux 就是把 Redux 这种架构模式和 React.js 结合起来的一个库，就是 Redux 架构在 React.js 中的体现
+所有对数据的操作必须通过 dispatch 函数
+
+命令式开发 & 声明式开发
+单向数据流 父组件可以向子组件传递值但是子组件不可以直接修改值
+函数式编程
+
+React中connect方法 https://www.jianshu.com/p/81e9e9eaf8fa
+
+
