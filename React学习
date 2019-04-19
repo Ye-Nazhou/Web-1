@@ -30,8 +30,19 @@ React官方文档总结
 第三章 组件&Props
 组件相当于JavaScript函数，要注意ES6之前class都是用函数表示的
 所以react组件也可以用函数或者class表示
-注意constructor函数和super函数是class自带的，render函数是将虚拟节点转换成实际节点，该函数是属于react的
+区分构造函数和class模式创建react组件的不同是理解关键
+注意constructor函数和super函数是class自带的，render函数是告诉react应该如何渲染虚拟节点，该函数是属于react的
 所有的react组件都必须像纯函数一样使用上级赋予的props
+注意props的本质是传递给构造函数的参数
+function Welcome(props) { //props由调用该构造函数的参数决定
+  return <h1>Hello, {props.name}</h1>;
+}
+
+class Welcome extends React.Component {
+  render() { //在class构造方式中，props在state中已经定义了
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
 
 
 第四章 State&生命周期
@@ -39,14 +50,14 @@ react主要步骤
 static defaultProps = {} static propTypes = {}  ->  constructor super this.state  ->
 componentWillMount -> render() -> componentDidMount() 
 组件运行时 state发生改变 -> 进行优化处理 shouldComponentUpdata -> componentWillMount
--> render() -> componentDidMount()
+-> render() -> componentDidMount() 注意实际DOM是在render之后才挂上去的，render是告诉
 组件卸载 -> componentWillUnmount() -> End
 父组件重新render导致props改变【注意props和state的区别】 -> componentWillReceiveProps()
 之前学过如果想要更新UI可以反复调用reactDom中的render函数，但是这一方法其实是耗费了资源
 另一种方法是更新state状态，state和props是类似的，但是state是完全受控于当前自身组件，是一种私有的变量
 props是可以被父组件所改变的
 注意对于类组件而言(即调用class生成的组件)， 应当始终使用props调用基础构造函数
-
+状态的更新可能是异步的，因此想要将多个setState调用合并，即现在的setState依赖于上一步setState所改变的
 
 前端组件化概念,组件名以大写字母开头
 React.js 可以用 JSX 来描述组件，JSX 其实就是 JavaScript 对象
@@ -71,7 +82,12 @@ state & setState
 setState 方法由父类 Component 所提供。调用这个函数时，React.js 会更新组件的状态 state ，并且重新调用 render 方法
 它接受一个对象或者函数作为参数
 当调用 setState 的时候，并不会马上修改 state
-如果想要使用上一次setState的结果，使用新的setState函数对结果进行处理，则可以往setState中传递函数
+如果想要使用上一次setState的结果，使用新的setState函数对结果进行处理，则可以往setState中传递参数来达成效果
+this.setState(function(prevState, props) {
+  return {
+    counter: prevState.counter + props.increment
+  };
+});
 
 handleClickOnLikeButton () {
     this.setState((prevState) => {
