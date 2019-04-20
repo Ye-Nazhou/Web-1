@@ -20,17 +20,27 @@ export default App;
 ~~~~~~~
 React官方文档总结
 
+
 第一章 JSX简介
+const element = <h1>Hello, world!</h1>;
+在React中不直接操作DOM结点，而是通过创建JSX对象进行操作
+JSX本质上是JavaScript的优化，在经过编译之后会转化为JavaScript语言
+对于JSX属性而言，有两种表示方式，一是以引号形式来定义字符串值，二是以括号形式定义JavaScript表达式
+由于JSX从本质而言是JavaScript，因此在定义属性名称时需要使用驼峰法
+
 
 第二章 元素渲染
+与浏览器中的DOM元素不同，React中的元素是JSX对象，需要通过React DOM进行渲染
 在这里可以得知一种更新UI的方式是通过调用reactDom的render函数
 每次调用的时候赋值props都发生改变，即可更新
+React只会智能更新必要部分，从而节约资源
 
 
 第三章 组件&Props
 组件相当于JavaScript函数，要注意ES6之前class都是用函数表示的
 所以react组件也可以用函数或者class表示
 区分构造函数和class模式创建react组件的不同是理解关键
+props是函数参数，它作为单个对象(即props对象)传递后可以赋值返回组件
 注意constructor函数和super函数是class自带的，render函数是告诉react应该如何渲染虚拟节点，该函数是属于react的
 所有的react组件都必须像纯函数一样使用上级赋予的props
 注意props的本质是传递给构造函数的参数
@@ -58,6 +68,64 @@ componentWillMount -> render() -> componentDidMount()
 props是可以被父组件所改变的
 注意对于类组件而言(即调用class生成的组件)， 应当始终使用props调用基础构造函数
 状态的更新可能是异步的，因此想要将多个setState调用合并，即现在的setState依赖于上一步setState所改变的
+
+
+第五章 事件处理
+React元素的事件处理和DOM元素事件处理类似
+两个不同之处
+1.React绑定事件属性命名采用驼峰法，而不是小写
+2.处理函数的传递问题，React是传入函数，DOM是字符串
+3.处理阻止默认函数 DOM可以直接在节点上写return false React必须要写清楚函数
+<button onclick="activateLasers()">
+  Activate Lasers
+</button>
+
+<button onClick={activateLasers}>
+  Activate Lasers
+</button>
+
+<a href="#" onclick="console.log('The link was clicked.'); return false">
+  Click me
+</a>
+
+function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  return (
+    <a href="#" onClick={handleClick}>
+      Click me
+    </a>
+  );
+}
+用class语法定义组件时事件处理会变成类的一个方法,类的方法默认是不会绑定this的
+React调用方法时，并不是通过对象方法的方式调用（this.handleClickOnTitle），而是直接通过函数调用(handleClickOnTitle)
+所以事件监听函数内并不能通过 this 获取到实例，事件绑定时注意bind指向 
+这个特性是JavaScript的一部分，如果说没有在方法后面添加() 即立即执行标志，则需要手动绑定this
+
+class Popper extends React.Component{
+    constructor(){
+        super();
+        this.state = {name:'Hello world!'};
+    }
+    
+    preventPop(name, e){    //事件对象e要放在最后
+        e.preventDefault();
+        alert(name);
+    }
+    
+    render(){
+        return (
+            <div>
+                <p>hello</p>
+                {/* Pass params via bind() method. */}
+                <a href="https://reactjs.org" onClick={this.preventPop.bind(this,this.state.name)}>Click</a>
+            </div>
+        );
+    }
+}
 
 前端组件化概念,组件名以大写字母开头
 React.js 可以用 JSX 来描述组件，JSX 其实就是 JavaScript 对象
