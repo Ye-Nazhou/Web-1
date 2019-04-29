@@ -34,7 +34,18 @@ JSX本质上是JavaScript的优化，在经过编译之后会转化为JavaScript
 在这里可以得知一种更新UI的方式是通过调用reactDom的render函数
 每次调用的时候赋值props都发生改变，即可更新
 React只会智能更新必要部分，从而节约资源
+Example:
+function tick() {
+  const element = (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    </div>
+  );
+  ReactDOM.render(element, document.getElementById('root'));
+}
 
+setInterval(tick, 1000);
 
 第三章 组件&Props
 组件相当于JavaScript函数，要注意ES6之前class都是用函数表示的
