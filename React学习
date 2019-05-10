@@ -65,6 +65,11 @@ class Welcome extends React.Component {
   }
 }
 
+props遵循和数组一致的展开运算方式
+function App2() {
+  const props = {firstName: 'Ben', lastName: 'Hector'};
+  return <Greeting {...props} />;
+}
 
 第四章 State&生命周期
 react主要步骤
@@ -164,8 +169,46 @@ React中的条件渲染和JavaScript中一致，即通过if else 三目运算等
 第十章 组合&继承
 对于React而言，建议使用组合而不是继承来复用组件代码
 
+目前对于Fragment而言，仅能接受key属性
 
+Why should I use super with props in the constructor?
 
+There is only one reason when one needs to pass props to super():
+When you want to access this.props in constructor.
+
+Passing:
+class MyComponent extends React.Component {    
+    constructor(props) {
+        super(props)
+
+        console.log(this.props)
+        // -> { icon: 'home', … } That means you can use props in the constructor
+    }
+}
+
+Not passing:
+class MyComponent extends React.Component {    
+    constructor(props) {
+        super()
+
+        console.log(this.props)
+        // -> undefined
+
+        // Props parameter is still available, however you cant use this.props
+        console.log(props)
+        // -> { icon: 'home', … }
+    }
+
+    render() {
+        // No difference outside constructor
+        console.log(this.props)
+        // -> { icon: 'home', … }
+    }
+}
+Note that passing or not passing props to super has no effect on later uses of this.props outside constructor.
+That is render, shouldComponentUpdate, or event handlers always have access to it.
+But in the Docs of React, it says you must use it.
+We can speculate it is either because of subclassing or for future compatibility.
 
 Redux官方文档
 
